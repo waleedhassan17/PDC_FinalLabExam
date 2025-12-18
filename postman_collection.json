@@ -1,0 +1,213 @@
+{
+  "info": {
+    "name": "Distributed Chat System - PDC Lab Exam",
+    "description": "REST API collection for testing the Distributed Chat System.\n\nComsats University Islamabad, Lahore Campus\nPDC Lab Exam - Fall 2025",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "health"]
+        }
+      }
+    },
+    {
+      "name": "2. Get Supported Languages",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/languages",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "languages"]
+        }
+      }
+    },
+    {
+      "name": "3. Set User Language",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"userId\": \"student123\",\n    \"language\": \"es\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/users/language",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "users", "language"]
+        }
+      }
+    },
+    {
+      "name": "4. Send Text Message (EN to ES)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"userId\": \"student123\",\n    \"text\": \"hello\",\n    \"sourceLanguage\": \"en\",\n    \"targetLanguage\": \"es\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/messages/text",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "messages", "text"]
+        }
+      }
+    },
+    {
+      "name": "5. Send Text Message (EN to FR)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"userId\": \"student123\",\n    \"text\": \"thank you\",\n    \"sourceLanguage\": \"en\",\n    \"targetLanguage\": \"fr\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/messages/text",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "messages", "text"]
+        }
+      }
+    },
+    {
+      "name": "6. Send Text Message (EN to UR)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"userId\": \"student123\",\n    \"text\": \"good morning\",\n    \"sourceLanguage\": \"en\",\n    \"targetLanguage\": \"ur\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/messages/text",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "messages", "text"]
+        }
+      }
+    },
+    {
+      "name": "7. Send Audio Message",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"userId\": \"student123\",\n    \"audioData\": \"SGVsbG8gV29ybGQhIFRoaXMgaXMgYSBkdW1teSBhdWRpbyBmaWxlIGZvciB0ZXN0aW5nIHB1cnBvc2VzLiBJbiBhIHJlYWwgc2NlbmFyaW8sIHRoaXMgd291bGQgYmUgYWN0dWFsIGF1ZGlvIGRhdGEgZW5jb2RlZCBpbiBiYXNlNjQgZm9ybWF0LiBUaGUgZ1JQQyBzZXJ2aWNlIHdpbGwgcHJvY2VzcyB0aGlzIGFuZCByZXR1cm4gdHJhbnNsYXRlZCBhdWRpby4=\",\n    \"audioFormat\": \"wav\",\n    \"sourceLanguage\": \"en\",\n    \"targetLanguage\": \"es\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/messages/audio",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "messages", "audio"]
+        }
+      }
+    },
+    {
+      "name": "8. Get Chat History",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/messages/history?userId=student123&limit=10",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "messages", "history"],
+          "query": [
+            {
+              "key": "userId",
+              "value": "student123"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "9. Get Performance Metrics",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/performance/metrics",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "performance", "metrics"]
+        }
+      }
+    },
+    {
+      "name": "10. Test Concurrent Messages",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"messages\": 10\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/test/concurrent",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "test", "concurrent"]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "chat-client",
+  "version": "1.0.0",
+  "description": "CLI Client for Distributed Chat System - PDC Lab Exam",
+  "main": "client.js",
+  "scripts": {
+    "start": "node client.js",
+    "interactive": "node client.js --interactive"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "chalk": "^4.1.2",
+    "readline-sync": "^1.4.10"
+  },
+  "author": "PDC Lab Exam - SP23-BCS",
+  "license": "MIT"
+}

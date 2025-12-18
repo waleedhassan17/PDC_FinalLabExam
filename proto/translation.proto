@@ -1,0 +1,65 @@
+// Translation Service Protocol Buffer Definition
+// This file defines the gRPC service for text translation
+// Used for Server → Server communication (API Gateway → Translation Service)
+
+syntax = "proto3";
+
+package translation;
+
+// The Translation Service handles text translation between languages
+// Uses hardcoded mappings for dummy translation (no external APIs)
+service TranslationService {
+  // Translates text from source language to target language
+  rpc TranslateText(TextRequest) returns (TextResponse);
+  
+  // Batch translation for multiple messages
+  rpc TranslateBatch(BatchTextRequest) returns (BatchTextResponse);
+  
+  // Get supported languages
+  rpc GetSupportedLanguages(Empty) returns (LanguagesResponse);
+}
+
+// Empty message for requests with no parameters
+message Empty {}
+
+// Request message for text translation
+message TextRequest {
+  string text = 1;              // The text to translate
+  string source_language = 2;   // Source language code (e.g., "en", "es", "fr")
+  string target_language = 3;   // Target language code
+  string user_id = 4;           // User identifier for tracking
+  int64 timestamp = 5;          // Unix timestamp of the request
+}
+
+// Response message containing translated text
+message TextResponse {
+  string original_text = 1;     // Original text that was sent
+  string translated_text = 2;   // Translated text result
+  string source_language = 3;   // Detected/specified source language
+  string target_language = 4;   // Target language used
+  bool success = 5;             // Whether translation was successful
+  string error_message = 6;     // Error message if translation failed
+  int64 processing_time_ms = 7; // Time taken to process in milliseconds
+}
+
+// Batch request for translating multiple texts
+message BatchTextRequest {
+  repeated TextRequest requests = 1;
+}
+
+// Batch response for multiple translations
+message BatchTextResponse {
+  repeated TextResponse responses = 1;
+  int64 total_processing_time_ms = 2;
+}
+
+// Response containing list of supported languages
+message LanguagesResponse {
+  repeated Language languages = 1;
+}
+
+// Language definition
+message Language {
+  string code = 1;    // Language code (e.g., "en")
+  string name = 2;    // Language name (e.g., "English")
+}

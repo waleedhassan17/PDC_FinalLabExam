@@ -1,0 +1,69 @@
+// Audio Processing Service Protocol Buffer Definition
+// This file defines the gRPC service for audio message processing
+// Uses binary Protobuf for efficient audio data transfer
+
+syntax = "proto3";
+
+package audio;
+
+// The Audio Processing Service handles audio message translation
+// Returns dummy translated audio (no real speech processing)
+service AudioService {
+  // Process and "translate" audio to target language
+  rpc ProcessAudio(AudioRequest) returns (AudioResponse);
+  
+  // Stream audio processing for larger files
+  rpc ProcessAudioStream(stream AudioChunk) returns (AudioResponse);
+  
+  // Get audio format information
+  rpc GetAudioInfo(AudioInfoRequest) returns (AudioInfoResponse);
+}
+
+// Request message for audio processing
+message AudioRequest {
+  bytes audio_data = 1;         // Binary audio data
+  string audio_format = 2;      // Format: "wav", "mp3", "ogg", etc.
+  string source_language = 3;   // Source language of the audio
+  string target_language = 4;   // Target language for translation
+  string user_id = 5;           // User identifier
+  int64 timestamp = 6;          // Unix timestamp
+  int32 sample_rate = 7;        // Audio sample rate (e.g., 44100)
+  int32 channels = 8;           // Number of audio channels (1=mono, 2=stereo)
+}
+
+// Response message containing processed audio
+message AudioResponse {
+  bytes translated_audio = 1;   // Translated audio binary data
+  string audio_format = 2;      // Output audio format
+  string source_language = 3;   // Source language detected/used
+  string target_language = 4;   // Target language used
+  bool success = 5;             // Whether processing was successful
+  string error_message = 6;     // Error message if processing failed
+  int64 processing_time_ms = 7; // Processing time in milliseconds
+  int32 original_size = 8;      // Original audio size in bytes
+  int32 processed_size = 9;     // Processed audio size in bytes
+}
+
+// Audio chunk for streaming
+message AudioChunk {
+  bytes data = 1;               // Chunk of audio data
+  int32 chunk_index = 2;        // Index of this chunk
+  bool is_last = 3;             // Whether this is the last chunk
+  string user_id = 4;           // User identifier
+  string target_language = 5;   // Target language for translation
+}
+
+// Request for audio information
+message AudioInfoRequest {
+  bytes audio_data = 1;         // Audio data to analyze
+}
+
+// Response with audio information
+message AudioInfoResponse {
+  string format = 1;            // Detected audio format
+  int32 duration_ms = 2;        // Duration in milliseconds
+  int32 sample_rate = 3;        // Sample rate
+  int32 channels = 4;           // Number of channels
+  int32 bit_depth = 5;          // Bit depth
+  int32 size_bytes = 6;         // Size in bytes
+}
