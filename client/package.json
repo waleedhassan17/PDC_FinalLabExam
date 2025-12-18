@@ -1,17 +1,32 @@
 {
-  "name": "chat-client",
+  "name": "TransLingoChat",
   "version": "1.0.0",
-  "description": "CLI Client for Distributed Chat System - PDC Lab Exam",
-  "main": "client.js",
+  "description": "React Native Client for Distributed Chat System - PDC Lab Exam",
+  "main": "index.js",
   "scripts": {
-    "start": "node client.js",
-    "interactive": "node client.js --interactive"
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
   },
   "dependencies": {
-    "axios": "^1.6.0",
-    "chalk": "^4.1.2",
-    "readline-sync": "^1.4.10"
+    "@expo/metro-runtime": "~6.1.2",
+    "@expo/vector-icons": "^15.0.3",
+    "@react-navigation/bottom-tabs": "^6.5.11",
+    "@react-navigation/native": "^6.1.9",
+    "expo": "^54.0.29",
+    "expo-status-bar": "~3.0.9",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "0.81.5",
+    "react-native-safe-area-context": "~5.6.0",
+    "react-native-screens": "~4.16.0",
+    "react-native-web": "^0.21.0"
   },
+  "devDependencies": {
+    "@babel/core": "^7.20.0"
+  },
+  "private": true,
   "author": "PDC Lab Exam - SP23-BCS",
   "license": "MIT"
 }
